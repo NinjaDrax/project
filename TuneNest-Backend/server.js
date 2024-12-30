@@ -5,6 +5,7 @@ import 'dotenv/config'
 import connectDB from "./src/config/mongodb.js";
 import songRouter from "./src/routes/songRoute.js";
 import albumRouter from "./src/routes/albumRoute.js";
+import userRouter from "./src/routes/userRoute.js";
 
 // app config
 const app = express()
@@ -19,6 +20,7 @@ app.use(cors())
 // Initializing Routers
 app.use("/api/song", songRouter )
 app.use("/api/album", albumRouter )
+app.use("/api/user", userRouter)
 
 app.get("/", (req, res) => res.send("API Working"))
 

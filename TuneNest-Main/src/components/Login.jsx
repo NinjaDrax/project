@@ -1,10 +1,46 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { assets } from '../assets/assets';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 
 const Login = () => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+      try {
+        
+        const response = await axios.post("http://localhost:4000/api/user/login", {
+          email,
+          password
+        });
+
+          if (response.data.success) {
+            toast.success("Registered Successfully!");
+            console.log("Logged In")
+            setEmail("");
+            setPassword("");
+            navigate("/home");
+          }
+          else {
+            toast.error("Something went wrong!");
+            console.log(response.data.message);
+          }
+       
+        } catch (error) {
+          toast.error("Error Occured!");
+          console.log(error);
+        }
+
+}
+
   return (
     <div className="h-screen bg-cover bg-center bg-custom-lightest">
       <div className="flex items-center justify-center h-full">
@@ -15,7 +51,7 @@ const Login = () => {
 
           <h1 className="text-2xl font-bold text-center mb-6 text-gray-700">Sign in to TuneNest</h1>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email or username</label>
               <input
@@ -24,6 +60,7 @@ const Login = () => {
                 name="email"
                 placeholder="Email or username"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -35,6 +72,7 @@ const Login = () => {
                 name="password"
                 placeholder="Password"
                 className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
