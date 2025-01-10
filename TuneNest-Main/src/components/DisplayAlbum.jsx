@@ -11,6 +11,7 @@ const DisplayAlbum = ({album}) => {
     const {id} = useParams();
     const [albumData,setAlbumData] = useState("")
     const {playWithId,albumsData,songsData} = useContext(PlayerContext);
+    console.log("this is album page")
     
     useEffect(()=>{
       albumsData.map((item)=>{

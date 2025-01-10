@@ -12,40 +12,28 @@ const App = () => {
   const { audioRef, track, songsData } = useContext(PlayerContext);
 
   return (
-    //  <div className='h-screen bg-black'>
-    //    {
-    //     songsData.length !==0
-    //       ? <>
-    //         <div className='h-[90%] flex'>
-    //           <Sidebar />
-    //           <Display />
-    //         </div>
-    //         <Player />
-    //       </>
-    //       : ""
-    //   }
 
-    //   <audio ref={audioRef} src={track?track.file:""} preload='auto'></audio> 
-    // </div>
     <Routes>
-      <Route path="/" element={<Login />} />
+      {/* <Route path="/" element={<Login />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/home" element={      <div className='h-screen bg-black'>
-       {
-        songsData.length !==0
-          ? <>
-            <div className='h-[90%] flex'>
-              <Sidebar />
-              <Display />
-            </div>
-            <Player />
-          </>
-          : ""
-      }
-
-      <audio ref={audioRef} src={track?track.file:""} preload='auto'></audio> 
-    </div>} />
+      <Route path="/" element={      
+            <div className='h-screen bg-black'>
+            {
+              songsData.length !==0
+                ? <>
+                  <div className='h-[90%] flex'>
+                    <Sidebar />
+                    <Display />
+                  </div>
+                  <Player />
+                </>
+                : ""
+            }
+      
+            <audio ref={audioRef} src={track?track.file:""} preload='auto'></audio>
+          </div>
+      } />
     </Routes>
 
 
